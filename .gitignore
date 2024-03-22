@@ -28,6 +28,8 @@
 *.app
 /Debug/
 
+data/
+
 .project
 .cproject
 .settings/
