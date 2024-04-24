@@ -2,13 +2,14 @@
 
 # NOTE: path to save workload data
 WL_PATH=$1
-# NOTE: what kind of workload do you need?
-WL_TYPES=( $2 )
-# NOTE: The size of workload
-LOAD_WORKLOAD_COUNTS=($3)
-RUN_WORKLOAD_COUNTS=($4)
+file=$2
+# # NOTE: what kind of workload do you need?
+# WL_TYPES=( $2 )
+# # NOTE: The size of workload
+# LOAD_WORKLOAD_COUNTS=($3)
+# RUN_WORKLOAD_COUNTS=($4)
 
-ZIPFIAN=($5)
+# ZIPFIAN=($5)
 
 
 # YCSB=`pwd`/ycsb-0.17.0/bin/ycsb
@@ -24,7 +25,7 @@ TEMPWORKLOADFILENAME=${WL_PATH}/${WORKLOAD}-${LOAD_WORKLOAD_COUNT}-${RUN_WORKLOA
 spec_dir='./mlsm_workloads/'
 # pushd $spec_dir
 # for file  in ${spec_dir}/*.spec; do
-file=./mlsm_workloads/workloada_65536kb_100GB_0.9_zipfian.spec
+# file=./mlsm_workloads/workloada_65536kb_100GB_0.9_zipfian.spec
   # moreve .spec from file
   file_name=$(basename $file)
   workload_name=${file_name%.spec}
