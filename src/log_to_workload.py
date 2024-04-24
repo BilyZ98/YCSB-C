@@ -20,7 +20,7 @@ output_run_file = open(output_run_filename, "w")
 output_load_lines = []
 output_run_lines = []
 
-is_load = True;
+is_load = True
 flush_count = 1000000
 with open(input_filename) as f:
     for l in f:
@@ -29,7 +29,7 @@ with open(input_filename) as f:
             continue
         if ls[0] in OPS:
             line = "{} {}\n".format(ls[0], ls[2][4:])
-            if is_load:
+            if ls[0] == "INSERT":
                 output_load_lines.append(line)
             else:
                 output_run_lines.append(line)
@@ -51,9 +51,9 @@ with open(input_filename) as f:
             output_run_file.writelines(output_run_lines)
             output_run_lines = []
 
-print(len(output_load_lines)  , " OPs")
+print("load count: ", len(output_load_lines))
 output_load_file.writelines(output_load_lines)
-print(len(output_run_lines), " OPs")
+print("run count: ", len(output_run_lines))
 output_run_file.writelines(output_run_lines)
 
 # input_file.close()
