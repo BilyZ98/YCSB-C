@@ -19,3 +19,4 @@ insertproportion=0
 
 requestdistribution=zipfian
 
+kZipfianConst=0.9

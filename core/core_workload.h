@@ -192,6 +192,7 @@ class CoreWorkload {
   bool ordered_inserts_;
   size_t record_count_;
   int zero_padding_;
+  double kZipfianConst;
 };
 
 inline std::string CoreWorkload::NextSequenceKey() {

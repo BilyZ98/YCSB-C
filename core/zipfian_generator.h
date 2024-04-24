@@ -13,6 +13,7 @@
 #include <cmath>
 #include <cstdint>
 #include <mutex>
+#include <iostream>
 #include "utils.h"
 
 namespace ycsbc {
@@ -35,6 +36,7 @@ class ZipfianGenerator : public Generator<uint64_t> {
     eta_ = Eta();
     
     Next();
+    std::cerr << "ZipfianGenerator() called, zipfian_const: " << zipfian_const << "\n";
   }
   
   ZipfianGenerator(uint64_t num_items) :

@@ -109,6 +109,9 @@ void CoreWorkload::Init(const utils::Properties &p) {
                                                     READ_ALL_FIELDS_DEFAULT));
   write_all_fields_ = utils::StrToBool(p.GetProperty(WRITE_ALL_FIELDS_PROPERTY,
                                                      WRITE_ALL_FIELDS_DEFAULT));
+
+  kZipfianConst = stod(p.GetProperty("kZipfianConst", "1.0"));
+  
   
   if (p.GetProperty(INSERT_ORDER_PROPERTY, INSERT_ORDER_DEFAULT) == "hashed") {
     ordered_inserts_ = false;
@@ -147,7 +150,7 @@ void CoreWorkload::Init(const utils::Properties &p) {
     // and pick another key.
     int op_count = std::stoi(p.GetProperty(OPERATION_COUNT_PROPERTY));
     int new_keys = (int)(op_count * insert_proportion * 2); // a fudge factor
-    key_chooser_ = new ScrambledZipfianGenerator(record_count_ + new_keys);
+    key_chooser_ = new ScrambledZipfianGenerator(record_count_ + new_keys, kZipfianConst);
     
   } else if (request_dist == "latest") {
     key_chooser_ = new SkewedLatestGenerator(insert_key_sequence_);
@@ -161,7 +164,7 @@ void CoreWorkload::Init(const utils::Properties &p) {
   if (scan_len_dist == "uniform") {
     scan_len_chooser_ = new UniformGenerator(1, max_scan_len);
   } else if (scan_len_dist == "zipfian") {
-    scan_len_chooser_ = new ZipfianGenerator(1, max_scan_len);
+    scan_len_chooser_ = new ZipfianGenerator(1, max_scan_len, kZipfianConst);
   } else {
     throw utils::Exception("Distribution not allowed for scan length: " +
         scan_len_dist);
@@ -179,7 +182,8 @@ ycsbc::Generator<uint64_t> *CoreWorkload::GetFieldLenGenerator(
   } else if(field_len_dist == "uniform") {
     return new UniformGenerator(1, field_len);
   } else if(field_len_dist == "zipfian") {
-    return new ZipfianGenerator(1, field_len);
+    double kZipfianConst = stod(p.GetProperty("kZipfianConst", "0.4"));
+    return new ZipfianGenerator(1, field_len, kZipfianConst);
   } else {
     throw utils::Exception("Unknown field length distribution: " +
         field_len_dist);

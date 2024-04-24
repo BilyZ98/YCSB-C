@@ -24,7 +24,7 @@ TEMPWORKLOADFILENAME=${WL_PATH}/${WORKLOAD}-${LOAD_WORKLOAD_COUNT}-${RUN_WORKLOA
 spec_dir='./mlsm_workloads/'
 # pushd $spec_dir
 # for file  in ${spec_dir}/*.spec; do
-file=./mlsm_workloads//workloada_1024kb_100GB_0.9_zipfian.spec
+file=./mlsm_workloads/workloada_65536kb_100GB_0.9_zipfian.spec
   # moreve .spec from file
   file_name=$(basename $file)
   workload_name=${file_name%.spec}
@@ -32,7 +32,8 @@ file=./mlsm_workloads//workloada_1024kb_100GB_0.9_zipfian.spec
   TEMPWORKLOADFILENAME=$file
   LOADLOGFILE=${WL_PATH}/${workload_name}.log
   echo $file
-  cmd="${YCSB} -db basic -threads 4 -P ${TEMPWORKLOADFILENAME} > ${LOADLOGFILE} 2>&1"
+  # cmd="${YCSB} -db basic -threads 4 -P ${TEMPWORKLOADFILENAME} > ${LOADLOGFILE} 2>&1"
+  cmd="${YCSB} -db basic -threads 4 -P ${TEMPWORKLOADFILENAME} > ${LOADLOGFILE}"
   echo $cmd
   eval $cmd
   ./src/log_to_workload.py ${LOADLOGFILE}
