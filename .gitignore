@@ -29,6 +29,7 @@
 /Debug/
 
 data/
+data_write_count_fig/
 
 .project
 .cproject

@@ -40,6 +40,8 @@ spec_dir='./mlsm_workloads/'
   ./src/log_to_workload.py ${LOADLOGFILE}
   rm ${LOADLOGFILE}
 
+  # draw write access count
+  ./src/write_access_count.py ${LOADLOGFILE}
 #
   # echo $f
   # cat $f >> ${TEMPWORKLOADFILENAME}
