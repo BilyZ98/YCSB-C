@@ -28,6 +28,7 @@ int DelegateClient(ycsbc::DB *db, ycsbc::CoreWorkload *wl, const int num_ops,
   db->Init();
   ycsbc::Client client(*db, *wl);
   int oks = 0;
+  wl->update_key_chooser(0.9);
   for (int i = 0; i < num_ops; ++i) {
     if (is_loading) {
       oks += client.DoInsert();

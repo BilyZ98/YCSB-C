@@ -32,7 +32,13 @@ class ScrambledZipfianGenerator : public Generator<uint64_t> {
   
   uint64_t Next();
   uint64_t Last();
-  
+  uint64_t get_num_items() const { return num_items_; }
+
+  virtual void Update(uint64_t theta){
+    generator_.Update(theta);
+    std::cerr << "scram update\n";
+  }
+
  private:
   const uint64_t base_;
   const uint64_t num_items_;

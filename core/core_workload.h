@@ -16,6 +16,7 @@
 #include "generator.h"
 #include "discrete_generator.h"
 #include "counter_generator.h"
+#include "scrambled_zipfian_generator.h"
 #include "utils.h"
 
 namespace ycsbc {
@@ -174,6 +175,10 @@ class CoreWorkload {
     if (scan_len_chooser_) delete scan_len_chooser_;
   }
   
+  void update_key_chooser(uint64_t theta) {
+    ((ScrambledZipfianGenerator*)(key_chooser_))->Update(theta);
+  }
+
  protected:
   static Generator<uint64_t> *GetFieldLenGenerator(const utils::Properties &p);
   std::string BuildKeyName(uint64_t key_num);

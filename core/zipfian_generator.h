@@ -48,6 +48,14 @@ class ZipfianGenerator : public Generator<uint64_t> {
 
   uint64_t Last();
   
+  virtual void Update(uint64_t theta){
+    theta_ = theta;
+    zeta_2_ = Zeta(2, theta_);
+    alpha_ = 1.0 / (1.0 - theta_);
+    eta_ = Eta();
+    std::cerr << "zipfiangene update\n";
+  }
+  
  private:
   ///
   /// Compute the zeta constant needed for the distribution.

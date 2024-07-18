@@ -19,6 +19,9 @@ class Generator {
  public:
   virtual Value Next() = 0;
   virtual Value Last() = 0;
+  virtual void Update(uint64_t){
+    std::cerr << "gene update\n";
+  }
   virtual ~Generator() { }
 };
 
