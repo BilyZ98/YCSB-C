@@ -16,6 +16,7 @@
 #include "core/client.h"
 #include "core/core_workload.h"
 #include "db/db_factory.h"
+#include "core/scrambled_zipfian_generator.h"
 
 using namespace std;
 
@@ -28,6 +29,7 @@ int DelegateClient(ycsbc::DB *db, ycsbc::CoreWorkload *wl, const int num_ops,
   db->Init();
   ycsbc::Client client(*db, *wl);
   int oks = 0;
+  // wl->key_chooser_ = new ycsbc::ScrambledZipfianGenerator(((ycsbc::ScrambledZipfianGenerator*)(wl->key_chooser_))->get_num_items(), 0.9); // 修改
   for (int i = 0; i < num_ops; ++i) {
     if (is_loading) {
       oks += client.DoInsert();

@@ -174,6 +174,7 @@ class CoreWorkload {
     if (scan_len_chooser_) delete scan_len_chooser_;
   }
   
+  Generator<uint64_t> *key_chooser_;
  protected:
   static Generator<uint64_t> *GetFieldLenGenerator(const utils::Properties &p);
   std::string BuildKeyName(uint64_t key_num);
@@ -185,7 +186,6 @@ class CoreWorkload {
   Generator<uint64_t> *field_len_generator_;
   Generator<uint64_t> *key_generator_;
   DiscreteGenerator<Operation> op_chooser_;
-  Generator<uint64_t> *key_chooser_;
   Generator<uint64_t> *field_chooser_;
   Generator<uint64_t> *scan_len_chooser_;
   CounterGenerator insert_key_sequence_;

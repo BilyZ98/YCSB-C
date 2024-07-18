@@ -20,6 +20,18 @@ print("output_fig_95_name:", output_fig_95_name)
 os.makedirs("data_write_count_fig/", exist_ok=True)
 
 df = pd.read_csv(data_path, delimiter=' ', header=None, names=['op', 'key'])
+# 
+df_count_update = df.groupby('op')
+for name, group in df_count_update:
+    print("Group:", name)
+    print("Count:", len(group))
+    group_counts_file = "data_write_count_fig/" + filename + "_load_group_counts.txt"
+    with open(group_counts_file, 'w') as f:
+        for name, group in df_count_update:
+            f.write("Group: {}\n".format(name))
+            f.write("Count: {}\n".format(len(group)))
+# exit(0)
+# 
 df_count_update = df.groupby('op').get_group('UPDATE')
 df_count = df_count_update.groupby('key').size().reset_index(name='counts')
 df_count_sort = df_count.sort_values(by=['counts'], ascending=True)
