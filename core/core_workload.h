@@ -175,8 +175,14 @@ class CoreWorkload {
     if (scan_len_chooser_) delete scan_len_chooser_;
   }
   
-  void update_key_chooser(uint64_t theta) {
+  void update_key_chooser(double theta) {
+    std::cerr<<"update_key_chooser\n";
+    std::cerr<<"theta in update_key_chooser: "<<theta<<"\n";
     ((ScrambledZipfianGenerator*)(key_chooser_))->Update(theta);
+  }
+
+  void change_key_chooser(uint64_t theta) {
+    key_chooser_ = new ScrambledZipfianGenerator(record_count_, theta);
   }
 
  protected:

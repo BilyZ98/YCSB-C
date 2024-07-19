@@ -28,11 +28,13 @@ int DelegateClient(ycsbc::DB *db, ycsbc::CoreWorkload *wl, const int num_ops,
   db->Init();
   ycsbc::Client client(*db, *wl);
   int oks = 0;
-  wl->update_key_chooser(0.9);
   for (int i = 0; i < num_ops; ++i) {
     if (is_loading) {
       oks += client.DoInsert();
     } else {
+      if (i == num_ops-50000){
+        wl->update_key_chooser(0.9);
+      }
       oks += client.DoTransaction();
     }
   }
@@ -53,8 +55,9 @@ int main(const int argc, const char *argv[]) {
   ycsbc::CoreWorkload wl;
   wl.Init(props);
 
-  const int num_threads = stoi(props.GetProperty("threadcount", "1"));
-
+  // const int num_threads = stoi(props.GetProperty("threadcount", "1"));
+  int num_threads = stoi(props.GetProperty("threadcount", "1"));
+  num_threads=1;
   // Loads data
   vector<future<int>> actual_ops;
   int total_ops = stoi(props[ycsbc::CoreWorkload::RECORD_COUNT_PROPERTY]);
@@ -70,6 +73,7 @@ int main(const int argc, const char *argv[]) {
     sum += n.get();
   }
   cerr << "# Loading records:\t" << sum << endl;
+
 
   // Peforms transactions
   actual_ops.clear();

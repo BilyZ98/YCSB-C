@@ -36,7 +36,11 @@ class ZipfianGenerator : public Generator<uint64_t> {
     eta_ = Eta();
     
     Next();
-    std::cerr << "ZipfianGenerator() called, zipfian_const: " << zipfian_const << "\n";
+    std::cerr << "ZipfianGenerator111() called, zipfian_const: " << zipfian_const << "\n";
+    // std::cerr <<"theta_raw: "<<theta_<<"\n";
+    // std::cerr <<"zeta_2_raw: "<<zeta_2_<<"\n";
+    // std::cerr <<"alpha_raw: "<<alpha_<<"\n";
+    // std::cerr <<"eta_raw: "<<eta_<<"\n";
   }
   
   ZipfianGenerator(uint64_t num_items) :
@@ -48,12 +52,17 @@ class ZipfianGenerator : public Generator<uint64_t> {
 
   uint64_t Last();
   
-  virtual void Update(uint64_t theta){
+  virtual void Update(double theta){
     theta_ = theta;
     zeta_2_ = Zeta(2, theta_);
     alpha_ = 1.0 / (1.0 - theta_);
+    RaiseZeta(num_items_);
     eta_ = Eta();
-    std::cerr << "zipfiangene update\n";
+    std::cerr << "zipfiangene111 update\n";
+    // std::cerr <<"theta_new: "<<theta_<<"\n";
+    // std::cerr <<"zeta_2_new: "<<zeta_2_<<"\n";
+    // std::cerr <<"alpha_new: "<<alpha_<<"\n";
+    // std::cerr <<"eta_new: "<<eta_<<"\n";
   }
   
  private:

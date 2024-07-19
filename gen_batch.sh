@@ -6,8 +6,8 @@ gen_path='./gen_workload.sh'
 files=$(ls $spec_base_path)
 
 files=(
-    /mnt/nvme1n1/xq/YCSB-C/mlsm_workloads/workloada_test_0.2.spec
-    /mnt/nvme1n1/xq/YCSB-C/mlsm_workloads/workloada_test_0.9.spec
+    # /mnt/nvme1n1/xq/YCSB-C/mlsm_workloads/workloada_test_0.2.spec
+    # /mnt/nvme1n1/xq/YCSB-C/mlsm_workloads/workloada_test_0.9.spec
     /mnt/nvme1n1/xq/YCSB-C/mlsm_workloads/workloada_test_var.spec
     # "/mnt/nvme1n1/xq/YCSB-C/mlsm_workloads/workloada_50M_0.2_zipfian.spec" 
     # "/mnt/nvme1n1/xq/YCSB-C/mlsm_workloads/workloada_50M_0.5_zipfian.spec"

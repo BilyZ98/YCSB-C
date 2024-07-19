@@ -24,7 +24,8 @@ class ScrambledZipfianGenerator : public Generator<uint64_t> {
       double zipfian_const = ZipfianGenerator::kZipfianConst) :
       base_(min), num_items_(max - min + 1),
       generator_(min, max, zipfian_const) {
-        std::cerr << "ScrambledZipfianGenerator() called, zipfian_const: " << zipfian_const << "\n";
+        std::cerr << "ScrambledZipfianGenerator111() called, zipfian_const: " << zipfian_const << "\n";
+        // std::cerr << "123() called, zipfian_const: " << zipfian_const << "\n";
       }
   
   ScrambledZipfianGenerator(uint64_t num_items, double zipfian_const) :
@@ -34,9 +35,9 @@ class ScrambledZipfianGenerator : public Generator<uint64_t> {
   uint64_t Last();
   uint64_t get_num_items() const { return num_items_; }
 
-  virtual void Update(uint64_t theta){
+  virtual void Update(double theta){
     generator_.Update(theta);
-    std::cerr << "scram update\n";
+    std::cerr << "scram update, theta: "<<theta<<"\n";
   }
 
  private:

@@ -9,6 +9,7 @@
 #ifndef YCSB_C_GENERATOR_H_
 #define YCSB_C_GENERATOR_H_
 
+#include <iostream>
 #include <cstdint>
 #include <string>
 
@@ -19,7 +20,7 @@ class Generator {
  public:
   virtual Value Next() = 0;
   virtual Value Last() = 0;
-  virtual void Update(uint64_t){
+  virtual void Update(double){
     std::cerr << "gene update\n";
   }
   virtual ~Generator() { }
